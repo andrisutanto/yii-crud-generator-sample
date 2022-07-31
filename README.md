@@ -2,232 +2,97 @@
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
     </a>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
+    <h1 align="center">Yii 2 CRUD Generator Sample</h1>
     <br>
 </p>
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-rapidly creating small projects.
+<h2>1. Buat project terlebih dahulu dengan cara:</h2>
+composer create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic yii-crud-generator-sample
 
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
+yii-crud-generator-sample -> dapat diganti sesuai nama project kalian. Pastikan composer telah terinstall pada PC/Laptop.
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![build](https://github.com/yiisoft/yii2-app-basic/workflows/build/badge.svg)](https://github.com/yiisoft/yii2-app-basic/actions?query=workflow%3Abuild)
+Tunggu hingga proses instalasi selesai. Jika sudah selesai maka akan terbentuk database baru sesuai nama project kita.
 
-DIRECTORY STRUCTURE
--------------------
+<h2>2. Setting Database
+Sesuaikan Setting database terlebih dahulu. Caranya: masuk kedalam folder config -> db.php
 
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
+Pada tutorial kali ini, saya membuat database baru bernama: yiicrud
+Berikut file db.php saya.
 
+<?php
 
-
-REQUIREMENTS
-------------
-
-The minimum requirement by this project template that your Web server supports PHP 5.6.0.
-
-
-INSTALLATION
-------------
-
-### Install via Composer
-
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
-
-You can then install this project template using the following command:
-
-~~~
-composer create-project --prefer-dist yiisoft/yii2-app-basic basic
-~~~
-
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
-
-~~~
-http://localhost/basic/web/
-~~~
-
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
-
-Set cookie validation key in `config/web.php` file to some random secret string:
-
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
-```
-
-You can then access the application through the following URL:
-
-~~~
-http://localhost/basic/web/
-~~~
-
-
-### Install with Docker
-
-Update your vendor packages
-
-    docker-compose run --rm php composer update --prefer-dist
-    
-Run the installation triggers (creating cookie validation code)
-
-    docker-compose run --rm php composer install    
-    
-Start the container
-
-    docker-compose up -d
-    
-You can then access the application through the following URL:
-
-    http://127.0.0.1:8000
-
-**NOTES:** 
-- Minimum required Docker engine version `17.04` for development (see [Performance tuning for volume mounts](https://docs.docker.com/docker-for-mac/osxfs-caching/))
-- The default configuration uses a host-volume in your home directory `.docker-composer` for composer caches
-
-
-CONFIGURATION
--------------
-
-### Database
-
-Edit the file `config/db.php` with real data, for example:
-
-```php
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
+    'dsn' => 'mysql:host=localhost;dbname=yiicrud',
     'username' => 'root',
-    'password' => '1234',
+    'password' => '',
     'charset' => 'utf8',
+
+    // Schema cache options (for production environment)
+    //'enableSchemaCache' => true,
+    //'schemaCacheDuration' => 60,
+    //'schemaCache' => 'cache',
 ];
-```
 
-**NOTES:**
-- Yii won't create the database for you, this has to be done manually before you can access it.
-- Check and edit the other files in the `config/` directory to customize your application as required.
-- Refer to the README in the `tests` directory for information specific to basic application tests.
+<h2>3. Setting Pretty URL</h2>
+Setting pretty URL pada app Yii anda dengan cara masuk ke dalam folder config -> web.php
+config buka file web.php, kemudian hilangkan remark pada bagian urlManager menjadi:
 
 
-TESTING
--------
-
-Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
-By default, there are 3 test suites:
-
-- `unit`
-- `functional`
-- `acceptance`
-
-Tests can be executed by running
-
-```
-vendor/bin/codecept run
-```
-
-The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
-tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
-they perform testing in real browser. 
+'urlManager' => [
+	'enablePrettyUrl' => true,
+        'showScriptName' => false,
+        'rules' => [
+    ],
+],
 
 
-### Running  acceptance tests
+<h2>4. Run Project</h2>
+Masuklah kedalam folder project, kemudian ketikkan: php yii serve
+Tunggu proses run project berjalan hingga muncul keterangan seperti berikut: Server started on http:localhost:8080/
+Buka browser anda, dan akses URL berikut: http://localhost:8080/gii
 
-To execute acceptance tests do the following:  
+<h2>5. Model Generator</h2>
+Selanjutlah pilih menu model generator, atau akses ke alamat: http://localhost:8080/gii/model
 
-1. Rename `tests/acceptance.suite.yml.example` to `tests/acceptance.suite.yml` to enable suite configuration
+Pada bagian Table Name, masukkan nama table yang ingin kita gunakan untuk app CRUD kita, pada tutorial ini saya menggunakan table name: member
 
-2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full-featured
-   version of Codeception
+Pastikan sudah ada table member pada database yang kalian gunakan, berikut SQL code saya:
 
-3. Update dependencies with Composer 
+CREATE TABLE `member` (
+	`id_member` INT(5) NOT NULL AUTO_INCREMENT,
+	`nama_lengkap` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`no_handphone` VARCHAR(12) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`id_member`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
 
-    ```
-    composer update  
-    ```
+https://prnt.sc/hSv9wuielb_c
 
-4. Download [Selenium Server](http://www.seleniumhq.org/download/) and launch it:
+https://prnt.sc/RuSO5e8RiqtM
 
-    ```
-    java -jar ~/selenium-server-standalone-x.xx.x.jar
-    ```
-
-    In case of using Selenium Server 3.0 with Firefox browser since v48 or Google Chrome since v53 you must download [GeckoDriver](https://github.com/mozilla/geckodriver/releases) or [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and launch Selenium with it:
-
-    ```
-    # for Firefox
-    java -jar -Dwebdriver.gecko.driver=~/geckodriver ~/selenium-server-standalone-3.xx.x.jar
-    
-    # for Google Chrome
-    java -jar -Dwebdriver.chrome.driver=~/chromedriver ~/selenium-server-standalone-3.xx.x.jar
-    ``` 
-    
-    As an alternative way you can use already configured Docker container with older versions of Selenium and Firefox:
-    
-    ```
-    docker run --net=host selenium/standalone-firefox:2.53.0
-    ```
-
-5. (Optional) Create `yii2basic_test` database and update it by applying migrations if you have them.
-
-   ```
-   tests/bin/yii migrate
-   ```
-
-   The database configuration can be found at `config/test_db.php`.
+Lanjutkan dengan klik Preview, dan lanjutkan dengan klik Generate dan tunggu hingga muncul keterangan seperti berikut: The code has been generated successfully.
 
 
-6. Start web server:
+<h2>6. CRUD Generator</h2>
 
-    ```
-    tests/bin/yii serve
-    ```
+Langkah selanjutnya, buka URL berikut: http://localhost:8080/gii/crud
 
-7. Now you can run all available tests
+Masukkan isian berikut:
 
-   ```
-   # run all available tests
-   vendor/bin/codecept run
+Member Class: app\models\Member
+Search Model Class: app\models\MemberSearch
+Controller Class: app\controllers\MemberController
 
-   # run acceptance tests
-   vendor/bin/codecept run acceptance
+https://prnt.sc/zLiyYaFwgWlF
 
-   # run only unit and functional tests
-   vendor/bin/codecept run unit,functional
-   ```
+Lanjutkan dengan klik Preview dan lanjutkan dengan klik Generate, dan tunggu hingga muncul keterangan seperti berikut: The code has been generated successfully.
 
-### Code coverage support
+<h2>7. Final Step
 
-By default, code coverage is disabled in `codeception.yml` configuration file, you should uncomment needed rows to be able
-to collect code coverage. You can run your tests and collect coverage with the following command:
+Jika sudah selesai, akses pada URL http://localhost:8080/member/
+Pada halaman ini, anda dapat create Member, Edit, dan Delete yang langsung terhubung pada Database.
 
-```
-#collect coverage for all tests
-vendor/bin/codecept run --coverage --coverage-html --coverage-xml
-
-#collect coverage only for unit tests
-vendor/bin/codecept run unit --coverage --coverage-html --coverage-xml
-
-#collect coverage for unit and functional tests
-vendor/bin/codecept run functional,unit --coverage --coverage-html --coverage-xml
-```
-
-You can see code coverage output under the `tests/_output` directory.
+Mudah bukan?!
