@@ -13,7 +13,7 @@ yii-crud-generator-sample -> dapat diganti sesuai nama project kalian. Pastikan 
 
 Tunggu hingga proses instalasi selesai. Jika sudah selesai maka akan terbentuk database baru sesuai nama project kita.
 
-<h2>2. Setting Database
+<h2>2. Setting Database</h2>
 Sesuaikan Setting database terlebih dahulu. Caranya: masuk kedalam folder config -> db.php
 
 Pada tutorial kali ini, saya membuat database baru bernama: yiicrud
@@ -90,7 +90,7 @@ https://prnt.sc/zLiyYaFwgWlF
 
 Lanjutkan dengan klik Preview dan lanjutkan dengan klik Generate, dan tunggu hingga muncul keterangan seperti berikut: The code has been generated successfully.
 
-<h2>7. Final Step
+<h2>7. Final Step</h2>
 
 Jika sudah selesai, akses pada URL http://localhost:8080/member/
 Pada halaman ini, anda dapat create Member, Edit, dan Delete yang langsung terhubung pada Database.
